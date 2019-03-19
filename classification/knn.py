@@ -111,8 +111,8 @@ def main():
     X = df.loc[:, df.columns != 'class']
 
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
-    knn(X_train, X_test, y_train, y_test)
-    knn_weighted(X_train, X_test, y_train, y_test)
+    # knn(X_train, X_test, y_train, y_test)
+    # knn_weighted(X_train, X_test, y_train, y_test)
 
     the_best_k(X_train, X_test, y_train, y_test, k=7)
 
