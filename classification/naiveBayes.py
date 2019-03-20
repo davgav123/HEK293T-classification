@@ -21,7 +21,7 @@ def CNB(x_train, x_test, y_train, y_test):
 
 
 def main():
-    df = pd.read_csv(join('data_preprocessed', 'combined_data.csv'))
+    df = pd.read_csv(join('..', 'data_preprocessed', 'combined_data.csv'))
 
     # target for our classification
     y = df['class']

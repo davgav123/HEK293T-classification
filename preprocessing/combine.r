@@ -1,5 +1,5 @@
 # set work directory
-# setwd("...")
+# setwd("whatever/HEK293-classification")
 getwd()
 
 library(data.table)

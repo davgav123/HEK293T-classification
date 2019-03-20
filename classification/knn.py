@@ -103,7 +103,7 @@ def the_best_k(X_train, X_test, y_train, y_test, k):
 
 
 def main():
-    df = pd.read_csv(join('data_preprocessed', 'combined_data.csv'))
+    df = pd.read_csv(join('..', 'data_preprocessed', 'combined_data.csv'))
 
     # target for our classification
     y = df['class']

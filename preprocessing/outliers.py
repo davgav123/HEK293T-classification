@@ -26,27 +26,27 @@ def remove_outliers(input_file, output_file):
 
 def main():
     input_files = [
-        os.path.join('data_preprocessed', '061_HEK293T_human_embryonic_kidney_transposed_filtered.csv'),
-        os.path.join('data_preprocessed', '065_HEK293T_human_embryonic_kidney_transposed_filtered.csv'),
-        os.path.join('data_preprocessed', '066_HEK293T_human_embryonic_kidney_transposed_filtered.csv'),
-        os.path.join('data_preprocessed', '067_HEK293T_human_embryonic_kidney_transposed_filtered.csv'),
-        os.path.join('data_preprocessed', '068_HEK293T_human_embryonic_kidney_transposed_filtered.csv'),
-        os.path.join('data_preprocessed', '073_HEK293T_human_embryonic_kidney_transposed_filtered.csv'),
-        os.path.join('data_preprocessed', '074_HEK293T_human_embryonic_kidney_transposed_filtered.csv'),
+        os.path.join('..', 'data_preprocessed', '061_HEK293T_human_embryonic_kidney_transposed_filtered.csv'),
+        os.path.join('..', 'data_preprocessed', '065_HEK293T_human_embryonic_kidney_transposed_filtered.csv'),
+        os.path.join('..', 'data_preprocessed', '066_HEK293T_human_embryonic_kidney_transposed_filtered.csv'),
+        os.path.join('..', 'data_preprocessed', '067_HEK293T_human_embryonic_kidney_transposed_filtered.csv'),
+        os.path.join('..', 'data_preprocessed', '068_HEK293T_human_embryonic_kidney_transposed_filtered.csv'),
+        os.path.join('..', 'data_preprocessed', '073_HEK293T_human_embryonic_kidney_transposed_filtered.csv'),
+        os.path.join('..', 'data_preprocessed', '074_HEK293T_human_embryonic_kidney_transposed_filtered.csv'),
     ]
 
     output_files = [
-        os.path.join('data_preprocessed', '061_HEK293T_class1.csv'),
-        os.path.join('data_preprocessed', '065_HEK293T_class2.csv'),
-        os.path.join('data_preprocessed', '066_HEK293T_class3.csv'),
-        os.path.join('data_preprocessed', '067_HEK293T_class4.csv'),
-        os.path.join('data_preprocessed', '068_HEK293T_class5.csv'),
-        os.path.join('data_preprocessed', '073_HEK293T_class6.csv'),
-        os.path.join('data_preprocessed', '074_HEK293T_class7.csv'),
+        os.path.join('..', 'data_preprocessed', '061_HEK293T_class1.csv'),
+        os.path.join('..', 'data_preprocessed', '065_HEK293T_class2.csv'),
+        os.path.join('..', 'data_preprocessed', '066_HEK293T_class3.csv'),
+        os.path.join('..', 'data_preprocessed', '067_HEK293T_class4.csv'),
+        os.path.join('..', 'data_preprocessed', '068_HEK293T_class5.csv'),
+        os.path.join('..', 'data_preprocessed', '073_HEK293T_class6.csv'),
+        os.path.join('..', 'data_preprocessed', '074_HEK293T_class7.csv'),
     ]
 
     # I have limited memory, so I will call garbage collector
-    # after elimination for every table
+    # after elimination for every table, just in case
     import gc
     remove_outliers(input_files[0], output_files[0])
     gc.collect()

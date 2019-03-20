@@ -1,5 +1,5 @@
 # set work directory
-# setwd("...")
+# setwd("whatever/HEK293-classification")
 getwd()
 
 # we can also put everything inside a function...

@@ -23,6 +23,7 @@ def svm_poly_kernel(X_train, X_test, y_train, y_test):
     error = []
     degrees = [1, 2, 3, 4, 5, 6]
 
+    # gamma is 0.1 because of no particular reason
     for d in degrees:
         clf = SVC(C=100, kernel='poly', degree=d, gamma=0.1)
         clf.fit(X_train, y_train)
@@ -80,7 +81,7 @@ def the_best_svm(X_train, X_test, y_train, y_test, d, c):
 
 
 def main():
-    df = pd.read_csv(join('data_preprocessed', 'combined_data.csv'))
+    df = pd.read_csv(join('..', 'data_preprocessed', 'combined_data.csv'))
 
     # target for our classification
     y = df['class']
