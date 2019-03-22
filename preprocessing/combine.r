@@ -8,13 +8,13 @@ library(plyr)
 combine.csv.files <- function()
 {
   input.files = c(
-    "./data_preprocessed/061_HEK293T_class1.csv",
-    "./data_preprocessed/065_HEK293T_class2.csv",
-    "./data_preprocessed/066_HEK293T_class3.csv",
-    "./data_preprocessed/067_HEK293T_class4.csv",
-    "./data_preprocessed/068_HEK293T_class5.csv",
-    "./data_preprocessed/073_HEK293T_class6.csv",
-    "./data_preprocessed/074_HEK293T_class7.csv"
+    file.path(".", "data_preprocessed", "061_HEK293T_class1.csv"),
+    file.path(".", "data_preprocessed", "065_HEK293T_class2.csv"),
+    file.path(".", "data_preprocessed", "066_HEK293T_class3.csv"),
+    file.path(".", "data_preprocessed", "067_HEK293T_class4.csv"),
+    file.path(".", "data_preprocessed", "068_HEK293T_class5.csv"),
+    file.path(".", "data_preprocessed", "073_HEK293T_class6.csv"),
+    file.path(".", "data_preprocessed", "074_HEK293T_class7.csv")
   )
   
   # read and add class column for every file
@@ -51,7 +51,7 @@ combine.csv.files <- function()
   gc()
   
   # save data frame into csv
-  fwrite(combined, "./data_preprocessed/combined_data.csv")
+  fwrite(combined, file.path(".", "data_preprocessed", "combined_data.csv"))
 }
 
 combine.csv.files()

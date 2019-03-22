@@ -25,7 +25,7 @@ transpose.and.filter <- function(inPath, outPath)
   colnames(df) = attr
   # attributes(df)
   
-  # delete columns with all rows
+  # delete columns with all zeros
   df.filtered = df[, colSums(df != 0) != 0]
   print(dim(df.filtered))
   
@@ -36,23 +36,23 @@ transpose.and.filter <- function(inPath, outPath)
   gc()
 }
 
-transpose.and.filter("./data/061_HEK293T_human_embryonic_kidney_csv.csv", 
-                     "./data_preprocessed/061_HEK293T_human_embryonic_kidney_transposed_filtered.csv")
+transpose.and.filter(file.path(".", "data", "061_HEK293T_human_embryonic_kidney_csv.csv"), 
+                     file.path(".", "data_preprocessed", "061_HEK293T_human_embryonic_kidney_transposed_filtered.csv"))
 
-transpose.and.filter("./data/065_HEK293T_human_embryonic_kidney_csv.csv", 
-                     "./data_preprocessed/065_HEK293T_human_embryonic_kidney_transposed_filtered.csv")
+transpose.and.filter(file.path(".", "data", "065_HEK293T_human_embryonic_kidney_csv.csv"), 
+                     file.path(".", "data_preprocessed", "065_HEK293T_human_embryonic_kidney_transposed_filtered.csv"))
 
-transpose.and.filter("./data/066_HEK293T_human_embryonic_kidney_csv.csv", 
-                     "./data_preprocessed/066_HEK293T_human_embryonic_kidney_transposed_filtered.csv")
+transpose.and.filter(file.path(".", "data", "066_HEK293T_human_embryonic_kidney_csv.csv"), 
+                     file.path(".", "data_preprocessed", "066_HEK293T_human_embryonic_kidney_transposed_filtered.csv"))
 
-transpose.and.filter("./data/067_HEK293T_human_embryonic_kidney_csv.csv", 
-                     "./data_preprocessed/067_HEK293T_human_embryonic_kidney_transposed_filtered.csv")
+transpose.and.filter(file.path(".", "data", "067_HEK293T_human_embryonic_kidney_csv.csv"), 
+                     file.path(".", "data_preprocessed", "067_HEK293T_human_embryonic_kidney_transposed_filtered.csv"))
 
-transpose.and.filter("./data/068_HEK293T_human_embryonic_kidney_csv.csv", 
-                     "./data_preprocessed/068_HEK293T_human_embryonic_kidney_transposed_filtered.csv")
+transpose.and.filter(file.path(".", "data", "068_HEK293T_human_embryonic_kidney_csv.csv"), 
+                     file.path(".", "data_preprocessed", "068_HEK293T_human_embryonic_kidney_transposed_filtered.csv"))
 
-transpose.and.filter("./data/073_HEK293T-human_embryonic_kidney_matcsv.csv", 
-                     "./data_preprocessed/073_HEK293T_human_embryonic_kidney_transposed_filtered.csv")
+transpose.and.filter(file.path(".", "data", "073_HEK293T-human_embryonic_kidney_matcsv.csv"), 
+                     file.path(".", "data_preprocessed", "073_HEK293T_human_embryonic_kidney_transposed_filtered.csv"))
 
-transpose.and.filter("./data/074_HEK293T-human_embryonic_kidney_csv.csv", 
-                     "./data_preprocessed/074_HEK293T_human_embryonic_kidney_transposed_filtered.csv")
+transpose.and.filter(file.path(".", "data", "074_HEK293T-human_embryonic_kidney_csv.csv"), 
+                     file.path(".", "data_preprocessed", "074_HEK293T_human_embryonic_kidney_transposed_filtered.csv"))
