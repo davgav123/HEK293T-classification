@@ -30,8 +30,7 @@ def hard_voting_with_weights_example(X_train, X_test, y_train, y_test):
     mnb = MultinomialNB()
     svc = SVC(C=100, kernel='poly', degree=1, gamma='scale')
 
-    mdl = VotingClassifier(estimators=[('RFC', rfc), ('KNN', knn), ('MNB', mnb), ('SVM', svc)], voting='hard',
-                           weights=[1.5, 1.7, 1, 2.5])
+    mdl = VotingClassifier(estimators=[('RFC', rfc), ('KNN', knn), ('MNB', mnb), ('SVM', svc)], voting='hard', weights=[1.5, 1.7, 1, 2.5])
     mdl.fit(X_train, y_train)
 
     print('hard voting, with weights, random forest, knn, mnb and svc with poly kernel')
@@ -45,8 +44,7 @@ def hard_voting_svm_example(X_train, X_test, y_train, y_test):
     svc3 = SVC(C=100, kernel='poly', degree=1, gamma=0.1)
     svc4 = SVC(C=100, kernel='poly', degree=3, gamma=0.1)
 
-    mdl = VotingClassifier(estimators=[('SVC1', svc1), ('SVC2', svc2), ('SVC3', svc3), ('SVC4', svc4)], voting='hard',
-                           weights=[1.2, 1, 1.2, 1])
+    mdl = VotingClassifier(estimators=[('SVC1', svc1), ('SVC2', svc2), ('SVC3', svc3), ('SVC4', svc4)], voting='hard', weights=[1.2, 1, 1.2, 1])
     mdl.fit(X_train, y_train)
 
     print('hard voting, with weights, svms with poly kernel')

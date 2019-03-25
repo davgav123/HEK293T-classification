@@ -10,11 +10,10 @@ from os.path import join
 import pandas as pd
 
 
-# this probably won't work, so we will not call it
 def boost_svm(X_train, X_test, y_train, y_test):
-    svm = SVC(C=100, kernel='poly', degree=1, gamma='scale')
+    svm = SVC(C=100, kernel='poly', degree=1, gamma='scale', probability=True)
 
-    abclf = AdaBoostClassifier(base_estimator=svm, n_estimators=3, algorithm='SAMME')
+    abclf = AdaBoostClassifier(base_estimator=svm, n_estimators=3)
     abclf.fit(X_train, y_train)
 
     # print('Train set acc: {}'.format(abclf.score(X_train, y_train)))
@@ -74,9 +73,10 @@ def main():
 
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
 
-    boost_naive_bayes(X_train, X_test, y_train, y_test)
-    boost_decision_tree(X_train, X_test, y_train, y_test)
-    boost_random_forest(X_train, X_test, y_train, y_test)
+    # boost_naive_bayes(X_train, X_test, y_train, y_test)
+    # boost_decision_tree(X_train, X_test, y_train, y_test)
+    # boost_random_forest(X_train, X_test, y_train, y_test)
+    boost_svm(X_train, X_test, y_train, y_test)
 
 
 if __name__ == '__main__':
