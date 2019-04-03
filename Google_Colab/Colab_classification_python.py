@@ -31,6 +31,9 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
 
 """# CLASSIFICATION
 
+## KNN
+
+
 Okay, let's start! We begin wilh KNN classifiers. We will run both weighted (distance) and non-weighted knn for different number of neighbors and see how will they behave.
 """
 
@@ -140,6 +143,8 @@ print(classification_report(y_test, y_pred))
 
 """So, the weighed model is better, but the difference is negligible. These models are doing very poorly in classification of class2, the class with the smallest number of patterns.
 
+## Naive Bayes
+
 We continue with **Naive Bayes** classificators. NB classificators won't probably have very good results, because of the data, but we will see.
 """
 
@@ -158,6 +163,9 @@ print('ComplementNB train acc: {}'.format(cnb.score(X_train, y_train)))
 print('ComplementNB test acc: {}'.format(cnb.score(X_test, y_test)))
 
 """We can clearly see that the KNN model is better.
+
+## SVM
+
 The next model will be **SVM**. Without any particular reason. classification will start with **rbf** kernel, and than we will try the others.
 """
 
@@ -276,6 +284,8 @@ print(classification_report(y_test, y_pred))
 
 I would say that the model with lower value for C is better, slightly, but better.
 
+## Ensemble
+
 Okay, the next in line are the ensemble methods, and we will use them to try to improve the results we got so far.
 A lot of differents models will be tested.
 
@@ -365,23 +375,24 @@ print('Test set acc: {}'.format(bclf.score(X_test, y_test)))
 The results are, unfortunately, worse than the non-bagging SVM, but not by much, and the difference is almost insignificant. The accuracy in bagging method could potentially increase for larger values for parameters, but we can't test it. We move onto the next models.
 
 Okay, with bagging finished, we can focus on boosting. We will use **AdaBoost** for our classification.
-Because knn does not support sample weights, we start with svm.
-
-I should mention that svm does not support the calculation of class probabilities with a predict_proba method, so we cannot use SAMME.R algorithm. Instead, we use SAMME, which takes more iterations, and usually gives us worse accuracy on test sets (from sckit-learn.org). Maybe that is the reason program always crashes. Will have to look that later **again**.
+Because knn does not support sample weights, we start with svm. We can enable probabilites for svm by setting value of probability parameter to True (False is default).
 """
 
 from sklearn.svm import SVC
 from sklearn.ensemble import AdaBoostClassifier
 
-svm = SVC(C=100, kernel='poly', degree=1, gamma='scale')
+svm = SVC(C=100, kernel='poly', degree=1, gamma='scale', probability=True)
 
-abclf = AdaBoostClassifier(base_estimator=svm, n_estimators=3, algorithm='SAMME')
+abclf = AdaBoostClassifier(base_estimator=svm, n_estimators=2)
 abclf.fit(X_train, y_train)
 
 # print('Train set acc: {}'.format(abclf.score(X_train, y_train)))
 print('Test set acc: {}'.format(abclf.score(X_test, y_test)))
 
-"""Because we can't boost neither knn nor, apparently, svm, we will boost some other methods, and observe the results. We begin with Naive Bayes."""
+"""This algorithm will crash after hours of execution if n_estimators > 1
+
+Now we will boost some other methods, and observe the results. We begin with Naive Bayes. This probably won't give us good results.
+"""
 
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.ensemble import AdaBoostClassifier
@@ -433,7 +444,7 @@ from sklearn.ensemble import AdaBoostClassifier
 
 rfc = RandomForestClassifier(n_estimators=100)
 
-abclf = AdaBoostClassifier(base_estimator=rfc, n_estimators=250)
+abclf = AdaBoostClassifier(base_estimator=rfc, n_estimators=400)
 abclf.fit(X_train, y_train)
 
 print('Train set acc: {}'.format(abclf.score(X_train, y_train)))
@@ -548,7 +559,126 @@ Pattern1 the most probable belongs to class6. That is probably true because prob
 The highest probability for pattern2 is 0.67 for class6 also. But it should be noted that the probability for class1 is also high, compared to the others.
 If we continue like this, we have that pattern3 -> class1, pattern4 -> class6, pattern5 -> class4, pattern6 -> class3.
 
-## SCALED DATA
+## Neural networks
+
+We will finish this section with Neural Networks. We will create different models with differents solvers.
+"""
+
+from sklearn.neural_network import MLPClassifier
+from sklearn.metrics import confusion_matrix
+
+n = len(X_train.loc[0, :])
+clf = MLPClassifier(solver='lbfgs', hidden_layer_sizes=(n // 16, n // 64))
+clf.fit(X_train, y_train)
+                    
+print('Test set acc: {}'.format(clf.score(X_test, y_test)))
+
+y_pred = clf.predict(X_test)
+
+print('confusion matrix:')
+print(confusion_matrix(y_test, y_pred))
+
+"""Results are fine, now, adam!"""
+
+from sklearn.neural_network import MLPClassifier
+from sklearn.metrics import confusion_matrix
+
+n = len(X_train.loc[0, :])
+clf = MLPClassifier(solver='adam', hidden_layer_sizes=(n // 16, n // 64))
+clf.fit(X_train, y_train)
+                    
+print('Test set acc: {}'.format(clf.score(X_test, y_test)))
+
+y_pred = clf.predict(X_test)
+
+print('confusion matrix:')
+print(confusion_matrix(y_test, y_pred))
+
+from sklearn.neural_network import MLPClassifier
+from sklearn.metrics import confusion_matrix
+
+n = len(X_train.loc[0, :])
+clf = MLPClassifier(solver='sgd', hidden_layer_sizes=(n // 16, n // 64))
+clf.fit(X_train, y_train)
+                    
+print('Test set acc: {}'.format(clf.score(X_test, y_test)))
+
+y_pred = clf.predict(X_test)
+
+print('confusion matrix:')
+print(confusion_matrix(y_test, y_pred))
+
+from sklearn.neural_network import MLPClassifier
+from sklearn.metrics import confusion_matrix
+
+n = len(X_train.loc[0, :])
+clf = MLPClassifier(solver='adam', activation='tanh', hidden_layer_sizes=(n // 16, n // 64, n // 128))
+clf.fit(X_train, y_train)
+                    
+print('Test set acc: {}'.format(clf.score(X_test, y_test)))
+
+y_pred = clf.predict(X_test)
+
+print('confusion matrix:')
+print(confusion_matrix(y_test, y_pred))
+
+from sklearn.neural_network import MLPClassifier
+from sklearn.metrics import confusion_matrix
+
+n = len(X_train.loc[0, :])
+clf = MLPClassifier(solver='adam', hidden_layer_sizes=(n // 16, n // 64, n // 128))
+clf.fit(X_train, y_train)
+                    
+print('Test set acc: {}'.format(clf.score(X_test, y_test)))
+
+y_pred = clf.predict(X_test)
+
+print('confusion matrix:')
+print(confusion_matrix(y_test, y_pred))
+
+from sklearn.neural_network import MLPClassifier
+from sklearn.metrics import confusion_matrix
+
+n = len(X_train.loc[0, :])
+clf = MLPClassifier(solver='adam')
+clf.fit(X_train, y_train)
+                    
+print('Test set acc: {}'.format(clf.score(X_test, y_test)))
+
+y_pred = clf.predict(X_test)
+
+print('confusion matrix:')
+print(confusion_matrix(y_test, y_pred))
+
+from sklearn.neural_network import MLPClassifier
+from sklearn.metrics import confusion_matrix
+
+n = len(X_train.loc[0, :])
+clf = MLPClassifier(solver='adam', hidden_layer_sizes=(n // 32))
+clf.fit(X_train, y_train)
+                    
+print('Test set acc: {}'.format(clf.score(X_test, y_test)))
+
+y_pred = clf.predict(X_test)
+
+print('confusion matrix:')
+print(confusion_matrix(y_test, y_pred))
+
+from sklearn.neural_network import MLPClassifier
+from sklearn.metrics import confusion_matrix
+
+n = len(X_train.loc[0, :])
+clf = MLPClassifier(solver='adam', activation='logistic', hidden_layer_sizes=(n // 16, n // 64))
+clf.fit(X_train, y_train)
+                    
+print('Test set acc: {}'.format(clf.score(X_test, y_test)))
+
+y_pred = clf.predict(X_test)
+
+print('confusion matrix:')
+print(confusion_matrix(y_test, y_pred))
+
+"""## SCALED DATA
 
 Now, out of curiosity, we test or models on data that is scaled to **[0, 1]**. Who knows, maybe the accuracy will imporove, although it probably won't.
 
@@ -641,7 +771,7 @@ y_pred = clf.predict(X_test_scaled)
 print('MAE: {}'.format(np.abs(np.mean(y_pred != y_test))))
 print(confusion_matrix(y_test, y_pred))
 
-"""RGF kernel is indeed more accurate on normalized data but not by much."""
+"""RBF kernel is indeed more accurate on normalized data but not by much."""
 
 from sklearn.svm import SVC
 from sklearn.metrics import confusion_matrix
