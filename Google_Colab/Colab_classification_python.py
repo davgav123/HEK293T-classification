@@ -284,7 +284,126 @@ print(classification_report(y_test, y_pred))
 
 I would say that the model with lower value for C is better, slightly, but better.
 
-## Ensemble
+## Neural networks
+
+We will finish this section with Neural Networks. We will create different models with differents solvers.
+"""
+
+from sklearn.neural_network import MLPClassifier
+from sklearn.metrics import confusion_matrix
+
+n = len(X_train.loc[0, :])
+clf = MLPClassifier(solver='lbfgs', hidden_layer_sizes=(n // 16, n // 64))
+clf.fit(X_train, y_train)
+                    
+print('Test set acc: {}'.format(clf.score(X_test, y_test)))
+
+y_pred = clf.predict(X_test)
+
+print('confusion matrix:')
+print(confusion_matrix(y_test, y_pred))
+
+"""Results are fine, now, adam!"""
+
+from sklearn.neural_network import MLPClassifier
+from sklearn.metrics import confusion_matrix
+
+n = len(X_train.loc[0, :])
+clf = MLPClassifier(solver='adam', hidden_layer_sizes=(n // 16, n // 64))
+clf.fit(X_train, y_train)
+                    
+print('Test set acc: {}'.format(clf.score(X_test, y_test)))
+
+y_pred = clf.predict(X_test)
+
+print('confusion matrix:')
+print(confusion_matrix(y_test, y_pred))
+
+from sklearn.neural_network import MLPClassifier
+from sklearn.metrics import confusion_matrix
+
+n = len(X_train.loc[0, :])
+clf = MLPClassifier(solver='sgd', hidden_layer_sizes=(n // 16, n // 64))
+clf.fit(X_train, y_train)
+                    
+print('Test set acc: {}'.format(clf.score(X_test, y_test)))
+
+y_pred = clf.predict(X_test)
+
+print('confusion matrix:')
+print(confusion_matrix(y_test, y_pred))
+
+from sklearn.neural_network import MLPClassifier
+from sklearn.metrics import confusion_matrix
+
+n = len(X_train.loc[0, :])
+clf = MLPClassifier(solver='adam', activation='tanh', hidden_layer_sizes=(n // 16, n // 64, n // 128))
+clf.fit(X_train, y_train)
+                    
+print('Test set acc: {}'.format(clf.score(X_test, y_test)))
+
+y_pred = clf.predict(X_test)
+
+print('confusion matrix:')
+print(confusion_matrix(y_test, y_pred))
+
+from sklearn.neural_network import MLPClassifier
+from sklearn.metrics import confusion_matrix
+
+n = len(X_train.loc[0, :])
+clf = MLPClassifier(solver='adam', hidden_layer_sizes=(n // 16, n // 64, n // 128))
+clf.fit(X_train, y_train)
+                    
+print('Test set acc: {}'.format(clf.score(X_test, y_test)))
+
+y_pred = clf.predict(X_test)
+
+print('confusion matrix:')
+print(confusion_matrix(y_test, y_pred))
+
+from sklearn.neural_network import MLPClassifier
+from sklearn.metrics import confusion_matrix
+
+n = len(X_train.loc[0, :])
+clf = MLPClassifier(solver='adam')
+clf.fit(X_train, y_train)
+                    
+print('Test set acc: {}'.format(clf.score(X_test, y_test)))
+
+y_pred = clf.predict(X_test)
+
+print('confusion matrix:')
+print(confusion_matrix(y_test, y_pred))
+
+from sklearn.neural_network import MLPClassifier
+from sklearn.metrics import confusion_matrix
+
+n = len(X_train.loc[0, :])
+clf = MLPClassifier(solver='adam', hidden_layer_sizes=(n // 32))
+clf.fit(X_train, y_train)
+                    
+print('Test set acc: {}'.format(clf.score(X_test, y_test)))
+
+y_pred = clf.predict(X_test)
+
+print('confusion matrix:')
+print(confusion_matrix(y_test, y_pred))
+
+from sklearn.neural_network import MLPClassifier
+from sklearn.metrics import confusion_matrix
+
+n = len(X_train.loc[0, :])
+clf = MLPClassifier(solver='adam', activation='logistic', hidden_layer_sizes=(n // 16, n // 64))
+clf.fit(X_train, y_train)
+                    
+print('Test set acc: {}'.format(clf.score(X_test, y_test)))
+
+y_pred = clf.predict(X_test)
+
+print('confusion matrix:')
+print(confusion_matrix(y_test, y_pred))
+
+"""## Ensemble
 
 Okay, the next in line are the ensemble methods, and we will use them to try to improve the results we got so far.
 A lot of differents models will be tested.
@@ -374,7 +493,58 @@ print('Test set acc: {}'.format(bclf.score(X_test, y_test)))
 
 The results are, unfortunately, worse than the non-bagging SVM, but not by much, and the difference is almost insignificant. The accuracy in bagging method could potentially increase for larger values for parameters, but we can't test it. We move onto the next models.
 
-Okay, with bagging finished, we can focus on boosting. We will use **AdaBoost** for our classification.
+We will try bagging on neural networks. We will use our best NN model.
+"""
+
+from sklearn.neural_network import MLPClassifier
+from sklearn.metrics import confusion_matrix
+from sklearn.ensemble import BaggingClassifier
+
+n = len(X_train.loc[0, :])
+nn = MLPClassifier(solver='adam', hidden_layer_sizes=(n // 16, n // 64))
+
+clf = BaggingClassifier(base_estimator=nn, n_estimators=6)
+clf.fit(X_train, y_train)
+
+print('Test set acc: {}'.format(clf.score(X_test, y_test)))
+
+y_pred = clf.predict(X_test)
+print('confusion matrix:')
+print(confusion_matrix(y_test, y_pred))
+
+"""Here, we are limited to just 6 estimators, but the results we got aren't bad. Our neural network classification model did not improve.
+
+We will now increase number of estimators in the models with good results. We won't build them here, on Google Colab, but this program could be used somewhere else.
+"""
+
+from sklearn.svm import SVC
+from sklearn.ensemble import BaggingClassifier
+
+svm = SVC(C=100, kernel='poly', degree=1, gamma='scale')
+
+bclf = BaggingClassifier(base_estimator=svm, n_estimators=50)
+bclf.fit(X_train, y_train)
+
+# print('Train set acc: {}'.format(bclf.score(X_train, y_train))) # this takes a lot of time so I commented it :D
+print('SVM Test set acc: {}'.format(bclf.score(X_test, y_test)))
+
+from sklearn.neural_network import MLPClassifier
+from sklearn.metrics import confusion_matrix
+from sklearn.ensemble import BaggingClassifier
+
+n = len(X_train.loc[0, :])
+nn = MLPClassifier(solver='adam', hidden_layer_sizes=(n // 16, n // 64))
+
+clf = BaggingClassifier(base_estimator=nn, n_estimators=50)
+clf.fit(X_train, y_train)
+
+print('Neural Network Test set acc: {}'.format(clf.score(X_test, y_test)))
+
+y_pred = clf.predict(X_test)
+print('confusion matrix for Neural Network:')
+print(confusion_matrix(y_test, y_pred))
+
+"""Okay, with bagging finished, we can focus on boosting. We will use **AdaBoost** for our classification.
 Because knn does not support sample weights, we start with svm. We can enable probabilites for svm by setting value of probability parameter to True (False is default).
 """
 
@@ -389,7 +559,7 @@ abclf.fit(X_train, y_train)
 # print('Train set acc: {}'.format(abclf.score(X_train, y_train)))
 print('Test set acc: {}'.format(abclf.score(X_test, y_test)))
 
-"""This algorithm will crash after hours of execution if n_estimators > 1
+"""This algorithm will crash after hours of execution if n_estimators > 1. My guess is that it needs more than 12 hours to build the seleceted model, witch is more than google colab provides. Unfortunately.
 
 Now we will boost some other methods, and observe the results. We begin with Naive Bayes. This probably won't give us good results.
 """
@@ -559,126 +729,7 @@ Pattern1 the most probable belongs to class6. That is probably true because prob
 The highest probability for pattern2 is 0.67 for class6 also. But it should be noted that the probability for class1 is also high, compared to the others.
 If we continue like this, we have that pattern3 -> class1, pattern4 -> class6, pattern5 -> class4, pattern6 -> class3.
 
-## Neural networks
-
-We will finish this section with Neural Networks. We will create different models with differents solvers.
-"""
-
-from sklearn.neural_network import MLPClassifier
-from sklearn.metrics import confusion_matrix
-
-n = len(X_train.loc[0, :])
-clf = MLPClassifier(solver='lbfgs', hidden_layer_sizes=(n // 16, n // 64))
-clf.fit(X_train, y_train)
-                    
-print('Test set acc: {}'.format(clf.score(X_test, y_test)))
-
-y_pred = clf.predict(X_test)
-
-print('confusion matrix:')
-print(confusion_matrix(y_test, y_pred))
-
-"""Results are fine, now, adam!"""
-
-from sklearn.neural_network import MLPClassifier
-from sklearn.metrics import confusion_matrix
-
-n = len(X_train.loc[0, :])
-clf = MLPClassifier(solver='adam', hidden_layer_sizes=(n // 16, n // 64))
-clf.fit(X_train, y_train)
-                    
-print('Test set acc: {}'.format(clf.score(X_test, y_test)))
-
-y_pred = clf.predict(X_test)
-
-print('confusion matrix:')
-print(confusion_matrix(y_test, y_pred))
-
-from sklearn.neural_network import MLPClassifier
-from sklearn.metrics import confusion_matrix
-
-n = len(X_train.loc[0, :])
-clf = MLPClassifier(solver='sgd', hidden_layer_sizes=(n // 16, n // 64))
-clf.fit(X_train, y_train)
-                    
-print('Test set acc: {}'.format(clf.score(X_test, y_test)))
-
-y_pred = clf.predict(X_test)
-
-print('confusion matrix:')
-print(confusion_matrix(y_test, y_pred))
-
-from sklearn.neural_network import MLPClassifier
-from sklearn.metrics import confusion_matrix
-
-n = len(X_train.loc[0, :])
-clf = MLPClassifier(solver='adam', activation='tanh', hidden_layer_sizes=(n // 16, n // 64, n // 128))
-clf.fit(X_train, y_train)
-                    
-print('Test set acc: {}'.format(clf.score(X_test, y_test)))
-
-y_pred = clf.predict(X_test)
-
-print('confusion matrix:')
-print(confusion_matrix(y_test, y_pred))
-
-from sklearn.neural_network import MLPClassifier
-from sklearn.metrics import confusion_matrix
-
-n = len(X_train.loc[0, :])
-clf = MLPClassifier(solver='adam', hidden_layer_sizes=(n // 16, n // 64, n // 128))
-clf.fit(X_train, y_train)
-                    
-print('Test set acc: {}'.format(clf.score(X_test, y_test)))
-
-y_pred = clf.predict(X_test)
-
-print('confusion matrix:')
-print(confusion_matrix(y_test, y_pred))
-
-from sklearn.neural_network import MLPClassifier
-from sklearn.metrics import confusion_matrix
-
-n = len(X_train.loc[0, :])
-clf = MLPClassifier(solver='adam')
-clf.fit(X_train, y_train)
-                    
-print('Test set acc: {}'.format(clf.score(X_test, y_test)))
-
-y_pred = clf.predict(X_test)
-
-print('confusion matrix:')
-print(confusion_matrix(y_test, y_pred))
-
-from sklearn.neural_network import MLPClassifier
-from sklearn.metrics import confusion_matrix
-
-n = len(X_train.loc[0, :])
-clf = MLPClassifier(solver='adam', hidden_layer_sizes=(n // 32))
-clf.fit(X_train, y_train)
-                    
-print('Test set acc: {}'.format(clf.score(X_test, y_test)))
-
-y_pred = clf.predict(X_test)
-
-print('confusion matrix:')
-print(confusion_matrix(y_test, y_pred))
-
-from sklearn.neural_network import MLPClassifier
-from sklearn.metrics import confusion_matrix
-
-n = len(X_train.loc[0, :])
-clf = MLPClassifier(solver='adam', activation='logistic', hidden_layer_sizes=(n // 16, n // 64))
-clf.fit(X_train, y_train)
-                    
-print('Test set acc: {}'.format(clf.score(X_test, y_test)))
-
-y_pred = clf.predict(X_test)
-
-print('confusion matrix:')
-print(confusion_matrix(y_test, y_pred))
-
-"""## SCALED DATA
+## SCALED DATA
 
 Now, out of curiosity, we test or models on data that is scaled to **[0, 1]**. Who knows, maybe the accuracy will imporove, although it probably won't.
 
