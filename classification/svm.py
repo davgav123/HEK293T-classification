@@ -39,6 +39,7 @@ def svm_poly_kernel(X_train, X_test, y_train, y_test):
     plt.title('Error Rate for different degree values in SVM with polynomial kernel (gamma is 0.1)')
     plt.xlabel('Degree values')
     plt.ylabel('Mean Absolute Error')
+    plt.show()
 
     # now we will change gamma to 'scale'
     error = []
@@ -60,6 +61,7 @@ def svm_poly_kernel(X_train, X_test, y_train, y_test):
     plt.title('Error Rate for different degree values in SVM with polynomial kernel (gamma = \'scale\')')
     plt.xlabel('Degree values')
     plt.ylabel('Mean Absolute Error')
+    plt.show()
 
 
 # best results are for d = 1, kernel = 'poly'

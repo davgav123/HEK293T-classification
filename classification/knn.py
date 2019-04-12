@@ -33,6 +33,7 @@ def knn(X_train, X_test, y_train, y_test):
     plt.title('Error Rate K Value')
     plt.xlabel('K Value')
     plt.ylabel('Mean Absolute Error')
+    plt.show()
 
 
 def knn_weighted(X_train, X_test, y_train, y_test):
@@ -58,6 +59,7 @@ def knn_weighted(X_train, X_test, y_train, y_test):
     plt.title('Error Rate K Value with Weights')
     plt.xlabel('K Value')
     plt.ylabel('Mean Absolute Error')
+    plt.show()
 
 
 # we know that for seven neighbors we have the best results!

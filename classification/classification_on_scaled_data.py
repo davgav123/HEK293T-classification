@@ -46,6 +46,7 @@ def scaled_knn(X_train_scaled, X_test_scaled, y_train, y_test):
     plt.title('Error Rate K Value')
     plt.xlabel('K Value')
     plt.ylabel('Mean Absolute Error')
+    plt.show()
 
 
 def scaled_svm_rbf(X_train_scaled, X_test_scaled, y_train, y_test):
