@@ -10,6 +10,7 @@ def random_forest_clf(X_train, X_test, y_train, y_test, metrics='gini'):
     rfc = RandomForestClassifier(n_estimators=100, criterion=metrics)
     rfc.fit(X_train, y_train)
 
+    print('criterion: {}'.format(metrics))
     print('Train set acc: {}'.format(rfc.score(X_train, y_train)))
     print('Test set acc: {}'.format(rfc.score(X_test, y_test)))
 

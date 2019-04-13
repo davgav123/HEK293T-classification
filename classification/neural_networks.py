@@ -6,7 +6,7 @@ from os.path import join
 import pandas as pd
 
 
-def n_network_classification_solver(X_train, X_test, y_train, y_test, sol='adam'):
+def n_network_classification(X_train, X_test, y_train, y_test, sol='adam'):
     n = len(X_train.loc[0, :])
     clf = MLPClassifier(solver=sol, hidden_layer_sizes=(n // 16, n // 64))
     clf.fit(X_train, y_train)
@@ -29,9 +29,9 @@ def main():
 
     print('reading finished')
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
-    # n_network_classification_solver(X_train, X_test, y_train, y_test, 'lbfgs')
-    n_network_classification_solver(X_train, X_test, y_train, y_test, 'adam')
-    # n_network_classification_solver(X_train, X_test, y_train, y_test, 'sgd')
+    # n_network_classification(X_train, X_test, y_train, y_test, 'lbfgs')
+    n_network_classification(X_train, X_test, y_train, y_test, 'adam')
+    # n_network_classification(X_train, X_test, y_train, y_test, 'sgd')
 
 
 if __name__ == '__main__':
