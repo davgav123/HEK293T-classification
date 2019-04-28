@@ -57,13 +57,13 @@ def combine_files(files):
     df074 = transpose_and_set_column_names(df074)
 
     # also, add class column
-    df061['class'] = 'class1'
-    df065['class'] = 'class2'
-    df066['class'] = 'class3'
-    df067['class'] = 'class4'
-    df068['class'] = 'class5'
-    df073['class'] = 'class6'
-    df074['class'] = 'class7'
+    df061['class'] = 1
+    df065['class'] = 2
+    df066['class'] = 3
+    df067['class'] = 4
+    df068['class'] = 5
+    df073['class'] = 6
+    df074['class'] = 7
 
     # combine files
     df = pd.concat([df061, df065, df066, df067, df068, df073, df074], axis=0, ignore_index=True)
@@ -73,7 +73,7 @@ def combine_files(files):
 
 def filter_zeros(df):
     """
-    delete columns that contains nothing else but zeros
+    delete columns that contain nothing else but zeros
     :param df: pandas.core.frame
     :return: filtered pandas.core.frame
     """
