@@ -1134,7 +1134,7 @@ from joblib import dump
 
 dump(bclf, '/content/gdrive/My Drive/ip_files/models/bagging_nnAdamRelu_estimators3_maxSamples100pct.pkl')
 
-"""Memory would allow us to have more estimators that 3, but we google is giving us runtime of 12 hours and we cannot execute this code in that time
+"""Memory would allow us to have more estimators than 3, but the Google is giving us runtime of 12 hours and we cannot execute this code in that time
 
 ### Boosting
 
@@ -1337,7 +1337,7 @@ knn = KNeighborsClassifier(n_neighbors=6, weights='distance')
 mnb = MultinomialNB()
 svm = SVC(C=300, kernel='poly', gamma='scale', degree=1, class_weight=None)
 
-vclf = VotingClassifier(estimators=[('RFC', rfc), ('KNN', knn), ('MNB', mnb), ('SVM', svc)], voting='hard', weights=[1.5, 1.7, 1, 2.5])
+vclf = VotingClassifier(estimators=[('RFC', rfc), ('KNN', knn), ('MNB', mnb), ('SVM', svm)], voting='hard', weights=[1.5, 1.7, 1, 2.5])
 vclf.fit(X_train, y_train)
 
 y_pred = vclf.predict(X_test)

@@ -19,18 +19,6 @@
 \usepackage{listings}
 \usepackage{setspace}
 
-\definecolor{Code}{rgb}{0.6,0.6,0.6}
-\definecolor{Decorators}{rgb}{0.5,0.5,0.5}
-\definecolor{Numbers}{rgb}{0.5,0,0}
-\definecolor{MatchingBrackets}{rgb}{0.25,0.5,0.5}
-\definecolor{Keywords}{rgb}{0,0,1}
-\definecolor{self}{rgb}{0,0,0}
-\definecolor{Strings}{rgb}{0,0.63,0}
-\definecolor{Comments}{rgb}{0,0.63,1}
-\definecolor{Backquotes}{rgb}{0,0,0}
-\definecolor{Classname}{rgb}{0,0,0}
-\definecolor{FunctionName}{rgb}{0,0,0}
-\definecolor{Operators}{rgb}{0,0,0}
 \definecolor{Background}{rgb}{0.97,0.97,0.97}
 
 \renewcommand{\lstlistingname}{Kod} % change caption: listing -> kod
@@ -118,8 +106,8 @@ Prvo ćemo izvršiti preprocesiranje nad datim podacima, nakon čega pristupamo 
 
 Preprocesiranje uključuje tri koraka. Prvo spajamo sve datoteke u jednu, dodeljući svakoj datoteci dodatnu kolonu koja označava klasu. Pre samog spajanja potrebno je izvršiti i transponovanje sadržaja. Nakon toga, eliminišemo sve kolone koje imaju samo nule kao vrednost, i na kraju vršimo eliminaciju elemenata van granica.
 
-\subsection{Transponovanje i eliminacija nula kolona}
-\label{subsec:Transponovanje_i_eliminacija_nula_kolona}
+\subsection{Spajanje i eliminacija nula kolona}
+\label{subsec:spajanje_i_eliminacija_nula_kolona}
 
 U ovoj sekciji se prvo bavimo transponovanjem sadržaja datoteka. Kao što smo već pomenuli, prva kolona svake datoteke sadrži nazive gena. Cilj nam je da, za svaku od datoteka, transponujemo sadržaj i da onda te nazive gena postavimo kao nazive atributa za svaku od kolona redom. Funkcija koja izvršava pomenuti proces je prikazana u kodu \ref{code:kod1}. Funkcija kao argument ima tabelu koju treba izmeniti, a povratna vrednost joj je promenjena tabela. \\
 
@@ -138,7 +126,7 @@ def transpose_and_set_column_names(df):
     return df    
 \end{lstlisting}
 
-Pokrenućemo datu funkciju za svaku od datoteka. Taj proces je prikazan za datoteku u kojoj se nalazi prva klasa u kodu \ref{code:kod2}. U listi \textit{files} se nalaze imena datoteka. Rezultat funkcije se za klasu jedan čuva u promenljivoj \textit{df061} nazvanoj po brojevima koji se nalaze na početku naziva datoteke. Analogno ćemo pozvati istu funkciju za ostale datoteke. Rezultat za klasu dva čuvamo u \textit{df065}, za klasu tri u \textit{df066} i tako redom.\\
+Pokrenućemo datu funkciju za svaku od datoteka. Taj proces je prikazan za datoteku u kojoj se nalazi prva klasa u kodu \ref{code:kod2}. Rezultat funkcije se za klasu jedan čuva u promenljivoj \textit{df061} nazvanoj po brojevima koji se nalaze na početku naziva datoteke. Analogno ćemo pozvati istu funkciju za ostale datoteke. Rezultat za klasu dva čuvamo u \textit{df065}, za klasu tri u \textit{df066} i tako redom.\\
 
 \begin{lstlisting}[language=Python3, caption=Primer transponovanja, label=code:kod2]
 
@@ -181,7 +169,7 @@ df.to_csv('combined_data.csv', index=False)
 \subsection{Eliminacija elemenata van granica}
 \label{subsec:Eliminacija_elemenata_van_granica}
 
-U ovoj sekciji će biti prikazan proces eliminacije elemenata van granica. Za uklanjanje će biti korišćen \textit{Local outlier factor} ili sraćeno LOF \cite{lof}. Vrednost parametra koji predstavlja broj suseda, kao i vrednost faktora koji nam služi za eliminaciju su izabrani demonstrativno, ali na takav način da se za svaku od klasa uklone neki predstavnici. Podaci bez elemenata van granica su sačuvani u datoteku \textit{data\_without\_outliers.csv}, dok su elementi van granica sačuvani u \textit{outliers.csv}. Obe datoteke su u csv formatu. Proces je prikazan u kodu \ref{code:kod5}. Dimenzije tabele bez elemenata van granica su 16997 redova i 22251 kolona, dok tabela koja sadrži elemente van granica ima isti broj kolona, ali naravno znatno manji broj redova, 82.\\
+U ovoj sekciji će biti prikazan proces eliminacije elemenata van granica. Za uklanjanje će biti korišćen \textit{Local outlier factor} ili skraćeno LOF \cite{lof}. Vrednost parametra koji predstavlja broj suseda, kao i vrednost faktora koji nam služi za eliminaciju su izabrani demonstrativno, ali na takav način da se za svaku od klasa uklone neki predstavnici. Podaci bez elemenata van granica su sačuvani u datoteku \textit{data\_without\_outliers.csv}, dok su elementi van granica sačuvani u \textit{outliers.csv}. Obe datoteke su u csv formatu. Proces je prikazan u kodu \ref{code:kod5}. Dimenzije tabele bez elemenata van granica su 16997 redova i 22251 kolona, dok tabela koja sadrži elemente van granica ima isti broj kolona, ali znatno manji broj redova, 82.\\
 
 \begin{lstlisting}[language=Python3, caption=Uklanjanje elemenata van granice, label=code:kod5]
 
@@ -199,7 +187,7 @@ cluster_df.to_csv('data_without_outliers.csv', index=False)
 outlier_df.to_csv('outliers.csv', index=False)
 \end{lstlisting}
 
-U tabeli \ref{tab:tabela1} se može videti broj primeraka za svaku od klasa nakon eliminacije elemenata van granica kao i broj ulonjenih primeraka. Vidimo da je klasa kojoj je uklonjeno najviše elemenata klasa četiri, dok je ona sa najmanje uklonjenih elemenata klasa dva.
+U tabeli \ref{tab:tabela1} se može videti broj primeraka za svaku od klasa nakon eliminacije elemenata van granica kao i broj uklonjenih primeraka. Vidimo da je klasa kojoj je uklonjeno najviše elemenata klasa četiri, dok je ona sa najmanje uklonjenih elemenata klasa dva.
 
 \begin{table}[h!]
 \begin{center}
@@ -229,15 +217,15 @@ Nakon završenog preprocesiranja možemo izvršiti uvid u podatke. Dobijena tabe
 \begin{center}
 \begin{tabular}{|l|c|c|c|c|c|c|c|} \hline
 Klasa & Broj primeraka & Udeo u podacima\\ \hline
-Klasa jedan & 793 & ~0.047\\ \hline
-Klasa dva & 66 & ~0.0039\\ \hline
-Klasa tri & 577 & ~0.034\\ \hline
-Klasa četiri & 4133 & ~0.24\\ \hline
-Klasa pet & 7853 & ~0.46\\ \hline
-Klasa šest & 3060 & ~0.18\\ \hline
-Klasa sedam & 515 & ~0.030\\ \hline
+Klasa jedan & 793 & $\sim$0.047\\ \hline
+Klasa dva & 66 & $\sim$0.0039\\ \hline
+Klasa tri & 577 & $\sim$0.034\\ \hline
+Klasa četiri & 4133 & $\sim$0.24\\ \hline
+Klasa pet & 7853 & $\sim$0.46\\ \hline
+Klasa šest & 3060 & $\sim$0.18\\ \hline
+Klasa sedam & 515 & $\sim$0.030\\ \hline
 \end{tabular}
-\caption{Broj primeraka za svaku od klasa i njen procenat}
+\caption{Broj primeraka za svaku od klasa i njen udeo}
 \label{tab:tabela2}
 \end{center}
 \end{table}
@@ -872,7 +860,7 @@ Primetimo da su dobijeni rezultati apsolutno jednaki. Ništa se ne menja ni pri 
 \subsection{Neuronske mre\v{z}e}
 \label{subsec:Nauronske_mreze}
 
-U ovoj sekciji se za klasifikaciju koriste modeli Neuronskih mreža (eng. \textit{Neural networks}) \cite{neuralnetworks}. Biblioteka \textit{skikit-learn} omogućava tri načina za treniranje neuronskih mreža:
+U ovoj sekciji se za klasifikaciju koriste modeli Neuronskih mreža (eng. \textit{Neural networks}) \cite{neuralnetworks}. Biblioteka \textit{skikit-learn} omogućava tri načina za treniranje neuronskih mreža (rešavača):
 \begin{itemize}
 	\item \textit{lbfgs}, tehnika optimizacije zasnovana na Kvazi-njutnovim metodama
 	\item \textit{sgd}, stohastički gradijentni spust
@@ -1080,12 +1068,12 @@ Poslednje napravljen model ima najvišu preciznost na test skupu od svih konstru
 \subsection{Ansambl metode}
 \label{subsec:Ansambl_metode}
 
-U ovom odeljku ćemo pokušati da, korišćenjem Ansambl metoda (eng. \textit{Ensemble mathods}) \cite{ensemble}, poboljšamo već konstruisane modele. Pored toga, biće uvedeni i neki novi modeli. Krenućemo od Nasumičnih šuma.
+U ovom odeljku ćemo pokušati da, korišćenjem Ansambl metoda (eng. \textit{Ensemble methods}) \cite{ensemble}, poboljšamo već konstruisane modele. Pored toga, biće uvedeni i neki novi modeli. Krenućemo od Nasumičnih šuma.
 
 \subsubsection{Nasumi\v{c}ne \v{s}ume}
 \label{subsubsec:Nasumicne_sume}
 
-Prva konstruisan model koji koristi ansambl metode je model Nasumičnih šuma (eng. \textit{Random forests}) \cite{ensemble}. Kao i kod stabla odlučivanja, konstruisani su modeli koji kao meru kvaliteta podele koriste gini i entropiju. Nakon toga, za iste mere podele, konstruisani su modeli sa balansiranim klasama. Svaki konstruisan model koristi 1000 estimatora u izgradnji modela. Prvo je konstruisan model sa nebalansiranim klasama koji koristi gini kao meru podele.
+Prvi konstruisan model koji koristi ansambl metode je model Nasumičnih šuma (eng. \textit{Random forests}) \cite{ensemble}. Kao i kod stabla odlučivanja, konstruisani su modeli koji kao meru kvaliteta podele koriste gini i entropiju. Nakon toga, za iste mere podele, konstruisani su modeli sa balansiranim klasama. Svaki konstruisan model koristi 1000 estimatora u izgradnji modela. Prvo je konstruisan model sa nebalansiranim klasama koji koristi gini kao meru podele.
 
 \begin{lstlisting}[language=Python3, caption=Nasumične šume; gini, label=code:kod34]
 rfc = RandomForestClassifier(n_estimators=1000, 
@@ -1273,7 +1261,7 @@ Matrica konfuzije:
 
 Dobijena je manja preciznost i na trening i na test skupu nego kod KNN modela bez beginga. Preciznost bi se verovatno povećala ako bismo konstruisali model sa višim vrednostima za parametre.
 
-Sledeći model koji poboljšavamo je SVM. Izabran je SVM sa polinomijalnim kernelon stepena jedan. Pri konstrukciji ovog modela takođe postoji memorijsko ograničenje zbog koga ne možemo da postavimo model na više vrednosti od postavljenjih.
+Sledeći model koji poboljšavamo je SVM. Izabran je SVM sa polinomijalnim kernelom stepena jedan. Pri konstrukciji ovog modela takođe postoji memorijsko ograničenje zbog koga ne možemo da postavimo parametre na više vrednosti od postavljenjih.
 
 \begin{lstlisting}[language=Python3, caption=Beging SVM, label=code:kod40]
 svm = SVC(C=300, kernel='poly', gamma='scale', 
@@ -1459,7 +1447,7 @@ svm = SVC(C=300, kernel='poly', gamma='scale', degree=1,
 
 vclf = VotingClassifier(estimators=[('RFC', rfc), 
 					('KNN', knn), ('MNB', mnb), 
-					('SVM', svc)], voting='hard', 
+					('SVM', svm)], voting='hard', 
 					weights=[1.5, 1.7, 1, 2.5])
 vclf.fit(X_train, y_train)
 
@@ -1547,7 +1535,7 @@ primerak4
 
 Za svako predviđanje je dobijena lista, takva da je na i-tom mestu verovatnoća pripadnosti i-toj klasi datog primerka. Posmatrajmo verovatnoće primerka tri. Možemo videti da on pripada klasi šest sa verovatnoćom 0.971, što je dosta visoko. Kada pogledamo kojoj klasi taj primerak pripada, stvarno dobijamo klasu šest. Greške u klasifikaciji mogu da nastanu kod primeraka kao što je primerak jedan. Vidimo da su njegove verovatnoće pripadnosti klasi četiri i klasi pet gotovo jednake, ali je verovatnoća za klasu pet veća pa će biti klasifikovan kao takav. Taj primerak je tačno klasifikovan. Interesantan je i rezultat predviđanja za primerak četiri, koji ne pripada nijednoj klasi sa visokom verovatnoćom. On je klasifikovan kao primerak klase jedan, što je netačno, zbog toga što je to stvarno primerak klase sedam, iako ima veoma nisku verovatnoću pripadnosti za tu klasu. Na kraju, primetimo i da je primerak dva tačno klasifikovan.
 
-Na samom kraju ove sekcije, želimo da kombinujemo model glasanja od modela koji su nam dali baš dobre rezultate. Izabrana su četiri SVM modela, dva koriste polinomijalni kernel, dok druga dva koriste rbf. Onima sa većim parametrom C su dodeljenje malo veće težine u glasanju. Modeli, parametri kao i težine modela se mogu videti u kodu \ref{code:kod48}. Izabrano je tvrdo glasanje.
+Na samom kraju ove sekcije, želimo da konstruišemo model glasanja od modela koji su nam dali baš dobre rezultate. Izabrana su četiri SVM modela, dva koriste polinomijalni kernel, dok druga dva koriste rbf. Modeli, parametri kao i težine modela se mogu videti u kodu \ref{code:kod48}. Izabrano je tvrdo glasanje.
 
 \begin{lstlisting}[language=Python3, caption=Glasanje svm modela, label=code:kod48]
 svc1 = SVC(C=100, kernel='poly', degree=1, gamma='scale')
@@ -1557,7 +1545,7 @@ svc4 = SVC(C=300, kernel='rbf', gamma='scale')
 
 vclf = VotingClassifier(estimators=[('SVC1', svc1), 
 		('SVC2', svc2), ('SVC3', svc3), ('SVC4', svc4)], 
-		voting='hard', weights=[1.1, 1, 1, 1.1])
+		voting='hard', weights=[1, 1, 1, 1])
 vclf.fit(X_train, y_train)
 
 y_pred = vclf.predict(X_test)
@@ -1635,7 +1623,7 @@ Matrica konfuzije:
  [  19    0    1    0   27  130]]
 \end{lstlisting}
 
-Preciznost se jeste povećala sa ovim pristupom ali je razlika nebitna (iznosi 0.005). Ovaj model je klasifikovao više primeraka u klasu tri tačno, ali ih je klasifikovao više i pogrešno. Konstruisaćemo prethodni model, ali sa dodatim težinama klasama, da bismo videli da li je došlo do nekih poboljšanja. Rezultati:
+Preciznost se jeste povećala sa ovim pristupom ali je razlika nebitna (iznosi 0,005). Ovaj model je klasifikovao više primeraka u klasu tri tačno, ali ih je klasifikovao više i pogrešno. Konstruisaćemo prethodni model, ali sa dodatim težinama klasama, da bismo videli da li je došlo do nekih poboljšanja. Rezultati:
 
 \begin{lstlisting}[language=Print]
 Preciznost na trening skupu: 1.0
@@ -1809,7 +1797,7 @@ upsampled = pd.concat([rest_of_the_data, class2_upsampled])
 \subsubsection{SVM}
 \label{svm_3}
 
-Konstruisaćemo najbolje SVM modele nad novim podacima. Prvi SVM model će koristiti rbf kernel i vrendnost parametra C će biti 300. Parametri sa mogu videti u kodu \ref{code:kod51}.
+Konstruisaćemo najbolje SVM modele nad novim podacima. Prvi SVM model će koristiti rbf kernel i vrednost parametra C će biti 300. Parametri se mogu videti u kodu \ref{code:kod51}.
 
 \begin{lstlisting}[language=Python3, caption=SVM sa rbf kernelom nakon dodavanja primeraka klase dva, label=code:kod51]
 clf = SVC(C=300, kernel='rbf', gamma='scale')
@@ -1854,7 +1842,7 @@ Matrica konfuzije:
  [   1    0    0    1    0   16  149]]
 \end{lstlisting}
 
-Ovaj model ima malu nižu preciznost i na test i na trening skupu od prethodnog. Precinznost u odnosu na model koji je konstruisan nad podacima sa manjim brojem primeraka klase dva je približno ista, što ne važi za vrednost odziva za klasu dva, koji ima nižu vrednost. Možemo primetiti i da je dodavanjem primeraka klase dva porastao broj pogrešno klasifikovanih primeraka drugih klasa u klasu dva.
+Ovaj model ima malu nižu preciznost i na test i na trening skupu od prethodnog. Preciznost u odnosu na model koji je konstruisan nad podacima sa manjim brojem primeraka klase dva je približno ista, što ne važi za vrednost odziva za klasu dva, koji ima nižu vrednost. Možemo primetiti i da je dodavanjem primeraka klase dva porastao broj pogrešno klasifikovanih primeraka drugih klasa u klasu dva.
 
 \subsubsection{Klasifikatori zasnovani na glasanju}
 \label{klasifikatori_zasnovani_na_glasanju_3}
@@ -1995,7 +1983,7 @@ Matrica konfuzije:
  [   1    0    0    1    0   15  150]]
 \end{lstlisting}
 
-Ovaj model je takođe dobar. Klasifikuje klasu dva dosta bolje od prethodnog, ali isto tako ima niži odziv za klasu tri. I ovaj model ima identične rezultate kao model sa istim parametrima konstruisan nad ne balansiranim podacima. Napomenimo i to da ta dva modela najbolje klasifikuju klasu dva od svih ostalih.
+Ovaj model je takođe dobar. Klasifikuje klasu dva dosta bolje od prethodnog, ali isto tako ima niži odziv za klasu tri. I ovaj model ima identične rezultate kao model sa istim parametrima konstruisan nad ne balansiranim podacima. Napomenimo i to da ta dva modela bolje klasifikuju klasu dva od svih ostalih.
 
 \subsubsection{Gradient boosting}
 \label{subsubsec:gradinet_boosting_3}
@@ -2150,7 +2138,7 @@ svc4 = SVC(C=300, kernel='rbf', gamma='scale')
 vclf = VotingClassifier(estimators=[('SVC1', svc1), 
 							('SVC2', svc2), ('SVC3', svc3), 
 							('SVC4', svc4)], voting='hard', 
-							weights=[1.1, 1, 1, 1.1])
+							weights=[1, 1, 1, 1])
 \end{lstlisting}
 
 \begin{lstlisting}[language=Print]
@@ -2167,7 +2155,7 @@ Matrica konfuzije:
  [   2    0    0    1    0   17  147]]
 \end{lstlisting}
 
-Od ova tri modela prvi ima najvišu precinzost i na test i na trening skupu, ali najgore klasifikuje primerke klase dva. Drugi model ima najviše tačno pogođenih primeraka klase dva, ali najlošnije klasifikuje klasu tri. Model zasnovan na glasanju različitih SVM modela se najbolje pokazao, zato što ima visoku preciznost i na test i na trening skupu, klasifikacija klase dva mu je bolja od klasifikacije klase dva SVM modela sa rbf kernelom. Bolje klasifikuje klasu tri od ostalih modela.
+Od ova tri modela prvi ima najvišu precinzost i na test i na trening skupu, ali najgore klasifikuje primerke klase dva. Drugi model ima najviše tačno pogođenih primeraka klase dva, ali najlošnije klasifikuje klasu tri. Model zasnovan na glasanju različitih SVM modela se najbolje pokazao, zato što ima visoku preciznost i na test i na trening skupu, a i klasifikacija klase dva mu je bolja od klasifikacije klase dva SVM modela sa rbf kernelom. Bolje klasifikuje klasu tri od ostalih modela.
 
 Za sam kraj napomenimo i to da su modeli poput neuronskih mreža i gradient busting imali visoku preciznost, ali su imali ili nižu preciznost na test ili trening skupu, ili su dosta lošije klasifikovali primerke klasa dva i tri.
 
