@@ -99,7 +99,7 @@ od kojih svaka predstavlja zasebnu klasu. Klase, imena i dimenzije datih datotek
 
 Sadržaj datoteka se nalazi u CSV formatu. Klasa pet se sastoji od najviše primeraka dok ih klasa dva sadrži ubedljivo najmanje. U svakoj datoteci prva kolona sadrži nazive gena, njih 31222, od kojih je svaki različit. Ostatak kolona su vrednosti koje određuju taj gen.\\
 
-Prvo ćemo izvršiti preprocesiranje nad datim podacima, nakon čega pristupamo klasifikaciji podataka. Za izvršavanje svih algoritama korišćen je programski jezik Pajton3 (eng. \textit{Python3}) i biblioteke \textit{pandas} \cite{pandas} za čitanje, pisanje i manipulaciju podataka,  \textit{numpy} \cite{numpy} i \textit{scikit-learn} \cite{scikit-learn} za detekciju elemenata van granice i za klasifikaciju. Za iscrtavanje grafika korišćena je biblioteka \textit{matplotlib} \cite{matplotlib}. Programi su izvršavani na \textit{Google Colaboratory} serveru \cite{googlecolab} na kome je dostupno 12,7GB RAM memorije.
+Prvo ćemo izvršiti preprocesiranje nad datim podacima, nakon čega pristupamo klasifikaciji podataka. Za izvršavanje svih algoritama korišćen je programski jezik Pajton3 (eng. \textit{Python3}) i biblioteke \textit{pandas} \cite{pandas} za čitanje, pisanje i manipulaciju podacima,  \textit{numpy} \cite{numpy} i \textit{scikit-learn} \cite{scikit-learn} za detekciju elemenata van granice i za klasifikaciju. Za iscrtavanje grafika korišćena je biblioteka \textit{matplotlib} \cite{matplotlib}. Programi su izvršavani na \textit{Google Colaboratory} serveru \cite{googlecolab} na kome je dostupno 12,7GB RAM memorije.
 
 \section{Preprocesiranje}
 \label{sec:Preprocesiranje}
@@ -276,7 +276,7 @@ Iscrtava se grafik koji prikazuje napravljenu grešku na trening skupu za svaku 
 \begin{center}
 \includegraphics[scale=0.4]{knn_k.png}
 \end{center}
-\caption{Greška za različite vrednosti parametra K sa težinama}
+\caption{Greška za različite vrednosti parametra K}
 \label{plt:grafik1}
 \end{figure}
 
@@ -299,7 +299,7 @@ for i in ks:
 \begin{center}
 \includegraphics[scale=0.4]{knn_k_weighted.png}
 \end{center}
-\caption{Greška za različite vrednosti parametra K}
+\caption{Greška za različite vrednosti parametra K sa težinama}
 \label{plt:grafik2}
 \end{figure}
 
@@ -343,7 +343,7 @@ Odavde može da se zaključi da ovaj model ima visoku preciznost na test skupu, 
 \subsection{Naivni Bajes}
 \label{subsec:Naivni_Bajes}
 
-Seda će biti isprobani Naivni Bajes (eng. \textit{Naive Bayes}), klasifikatori koji su zasnovani na verovatnoći \cite{naivebayes}. Moguće je da nam ovi klasifikatori ne daju dobre rezultate zato što se primarno koriste za klasifikaciju teksta. Ovi modeli se obično konstruišu veoma brzo, pa će zbog toga biti isprobani. Prvi model koji konstruišemo je \textit{MultinomialNB} \cite{multinomnb}. Kod \ref{code:kod10} je izbacio prikazane rezultate.\\
+Seda će biti isprobani Naivni Bajes (eng. \textit{Naive Bayes}) klasifikatori, koji su zasnovani na verovatnoći \cite{naivebayes}. Moguće je da nam ovi klasifikatori ne daju dobre rezultate zato što se primarno koriste za klasifikaciju teksta. Ovi modeli se obično konstruišu veoma brzo, pa će zbog toga biti isprobani. Prvi model koji konstruišemo je \textit{MultinomialNB} \cite{multinomnb}. Kod \ref{code:kod10} je izbacio prikazane rezultate.\\
 
 \begin{lstlisting}[language=Python3, caption=MultinomialNB, label=code:kod10]
 mnb = MultinomialNB()
@@ -597,7 +597,7 @@ y_pred = clf.predict(X_test)
 
 \begin{lstlisting}[language=Print]
 Preciznost na trening skupu: 0.9817
-Precinzost na test skupu: 0.9524
+Preciznost na test skupu: 0.9524
 
 Odziv: [0.9876 0.1875 0.7799 0.9279 0.9675 0.9932 0.8982]
 
@@ -853,7 +853,7 @@ Matrica konfuzije:
  [   3    0    0    0    0   14  150]]
 \end{lstlisting}
 
-Primetimo da su dobijeni rezultati apsolutno jednaki. Ništa se ne menja ni pri promeni parametra C, ni za balansiran ni za ne balansiran pristup.
+Primetimo da su dobijeni rezultati apsolutno jednaki. Ništa se ne menja ni pri promeni parametra C, ni za balansiran ni za nebalansiran pristup.
 
 \newpage %<-----
 
@@ -907,7 +907,7 @@ Model ima visoku preciznost na trening i test skupu, ali loše klasifikuje prime
 
 Sada ćemo isprobati različite rešavače. Model neuronske mreže će imati dva skirvena sloja, u kojima se redom nalaze $N / 16$ i $N / 64$ neurona, gde je N broj atributa na trening skupu. Funkcija aktivacije je relu. Na žalost, mašina na kojoj se pokreću modeli nema dovoljno RAM memorije da bismo pokrenuli \textit{lbfgs} rešavač. Prvi model koristi stohastički gradijentni spust (kod \ref{code:kod28}).
 
-\begin{lstlisting}[language=Python3, caption=Stohasti;ki gradijentni spust; Relu, label=code:kod28]
+\begin{lstlisting}[language=Python3, caption=Stohastički gradijentni spust; Relu, label=code:kod28]
 clf = MLPClassifier(solver='sgd', activation='relu', 
 					hidden_layer_sizes=(n // 16, n // 64))
 clf.fit(X_train, y_train)
@@ -1193,7 +1193,7 @@ Preciznost na test skupu je opala u ovim modelima u odnosu na modele bez balansi
 
 %kako prevesti gradijent busting?
 
-Gradijent busting (eng. \textit{Gradient boosting}) \cite{ensemble} je sledeći isprobani pristup. Biblioteka koju koristimo nam dozvoljava da biramo izmedju dve funkcije gubitka, \textit{deviance} i \textit{exponential}. Druga se može koristiti ukoliko imamo dve klase. Iz tog razloga biće korišćena samo prva, koja je definisana kao linearna regresija $y=ax+b+e$, gde je \textit{e} greška. Kao mera kvaliteta podele korišćena je fridmanova srednje kvadratna greška (eng. \textit{Friedman mse}), što je poboljšana srednje kvadratna greška. To je i podrazumevana vrednost. Pokrenuto je nekoliko modela sa različitim brojem estimatora, i svakim povećanjem dobijena je veća preciznost. U kodu \ref{code:kod38} je prikazana izgradnja modela za 700 estimatora.
+Gradijent busting (eng. \textit{Gradient boosting}) \cite{ensemble} je sledeći isprobani pristup. Biblioteka koju koristimo nam dozvoljava da biramo izmedju dve funkcije gubitka, \textit{deviance} i \textit{exponential}. Druga se može koristiti ukoliko imamo dve klase. Iz tog razloga biće korišćena samo prva, koja je definisana kao logistička regresija $y=ax+b+e$, gde je \textit{e} greška. Kao mera kvaliteta podele korišćena je Fridmanova srednje kvadratna greška (eng. \textit{Friedman mse}), što je poboljšana srednje kvadratna greška. To je i podrazumevana vrednost. Pokrenuto je nekoliko modela sa različitim brojem estimatora, i svakim povećanjem dobijena je veća preciznost. U kodu \ref{code:kod38} je prikazana izgradnja modela za 700 estimatora.
 
 \begin{lstlisting}[language=Python3, caption=Gradijent busting, label=code:kod38]
 gbc = GradientBoostingClassifier(loss='deviance', 
@@ -1292,7 +1292,7 @@ Matrica konfuzije:
  [   1    0    0    1    0   18  147]]
 \end{lstlisting}
 
-Model koji koristi beging i model koji ga ne koriste imaju veoma slične rezultate. Razlika u precinzosti na trening i test skupu je veoma mala. Model sa begingom lošije klasifikuje klasu dva, ali malo bolje klasifikuje klasu tri.
+Model koji koristi beging i model koji ga ne koriste imaju veoma slične rezultate. Razlika u preciznosti na trening i test skupu je veoma mala. Model sa begingom lošije klasifikuje klasu dva, ali malo bolje klasifikuje klasu tri.
 
 Na kraju ove sekcije primenjujemo beging na neuronsku mrežu. Izabran je jedan od boljih modela, funkcija aktivacije je relu, dok je rešavač adam. Ova neuronska mreža ima tri skrivena sloja. Broj neurona na svakim sloju zavisi od N, broja atributa na trening skupu. I ovde važi ograničenje nad parametrima iz prethodno pomenutih razloga.
 
@@ -1537,7 +1537,7 @@ Za svako predviđanje je dobijena lista, takva da je na i-tom mestu verovatnoća
 
 Na samom kraju ove sekcije, želimo da konstruišemo model glasanja od modela koji su nam dali baš dobre rezultate. Izabrana su četiri SVM modela, dva koriste polinomijalni kernel, dok druga dva koriste rbf. Modeli, parametri kao i težine modela se mogu videti u kodu \ref{code:kod48}. Izabrano je tvrdo glasanje.
 
-\begin{lstlisting}[language=Python3, caption=Glasanje svm modela, label=code:kod48]
+\begin{lstlisting}[language=Python3, caption=Glasanje SVM modela, label=code:kod48]
 svc1 = SVC(C=100, kernel='poly', degree=1, gamma='scale')
 svc2 = SVC(C=300, kernel='poly', degree=1, gamma='scale')
 svc3 = SVC(C=100, kernel='rbf', gamma='scale')
@@ -1662,7 +1662,7 @@ Matrica konfuzije:
  [   4    0    0    0    6  167]]
 \end{lstlisting}
 
-Dobijeni su dobri rezultati za svaku od klasa, i slični su modelu konstruisanom nad podacima sa klasom dva. Nakon toga je pokrenut model sa istim parametrima, ali sa dodeljenim balansiranum težinama svakoj od klasa. Rezultati: 
+Dobijeni su dobri rezultati za svaku od klasa, i slični su modelu konstruisanom nad podacima sa klasom dva. Nakon toga je pokrenut model sa istim parametrima, ali sa dodeljenim balansiranim težinama svakoj od klasa. Rezultati: 
 
 \begin{lstlisting}[language=Print]
 Preciznost na trening skupu: 0.9921
@@ -1742,7 +1742,7 @@ Model ima visoku preciznost i na trening i na test skupu, ali daje gore rezultat
 
 Ovde će biti isproban samo jedan model koji kombinuje različite SVM klasifikatore u jedan. Izabrani su neki od modela koji su nam do sada dali dobre rezultate. Modeli i parametri se mogu videti u kodu \ref{code:kod49}. Primenjeno je tvrdo glasanje bez dodatih težina klasifikatorima.
 
-\begin{lstlisting}[language=Python3, caption=Glasanje svm modela bez klase dva, label=code:kod49]
+\begin{lstlisting}[language=Python3, caption=Glasanje SVM modela bez klase dva, label=code:kod49]
 svc1 = SVC(C=100, kernel='poly', degree=1, gamma='scale')
 svc2 = SVC(C=100, kernel='rbf', degree=1, gamma='scale', 
 				class_weight='balanced')
@@ -1824,7 +1824,7 @@ Matrica konfuzije:
  [   3    0    0    0    0   15  149]]
 \end{lstlisting}
 
-Ovaj model ima malo veću preciznost i na trening i na test skupu od SVM modela sa istim parametrima konstruisanog nad podacima kojima nisu dodati veštački generisani primerci klase dva. Takođe, ovaj model ima veću vrednost odziva za klasu dva. Primerke ostalih klasa klasifikuje skoro isto kao i malopre pomenuti model. Sada konstruišemo SVM sa polinomijalnim kernelon stepena jedan. Vrednost parametra C ovog modela je takođe 300. Dobijeni su rezultati:
+Ovaj model ima malo veću preciznost i na trening i na test skupu od SVM modela sa istim parametrima konstruisanog nad podacima kojima nisu dodati veštački generisani primerci klase dva. Takođe, ovaj model ima veću vrednost odziva za klasu dva. Primerke ostalih klasa klasifikuje skoro isto kao i malopre pomenuti model. Sada konstruišemo SVM sa polinomijalnim kernelom stepena jedan. Vrednost parametra C ovog modela je takođe 300. Dobijeni su rezultati:
 
 \begin{lstlisting}[language=Print]
 Preciznost na trening skupu: 0.9801
@@ -1849,7 +1849,7 @@ Ovaj model ima malu nižu preciznost i na test i na trening skupu od prethodnog.
 
 Pokušaćemo glasanjem između različith SVM modela da dobijemo bolji rezultat. Izabrana su dva modela sa polinomijalnim kernelom, i dva sa rbf kernelom. Parametri modela se mogu videti u kodu \ref{code:kod52}.
 
-\begin{lstlisting}[language=Python3, caption=Glasanje svm modela sa dodatnim primercima klase dva, label=code:kod52]
+\begin{lstlisting}[language=Python3, caption=Glasanje SVM modela sa dodatnim primercima klase dva, label=code:kod52]
 svc1 = SVC(C=100, kernel='poly', degree=1, gamma='scale')
 svc2 = SVC(C=300, kernel='poly', degree=1, gamma='scale')
 svc3 = SVC(C=100, kernel='rbf', gamma='scale')
@@ -1928,7 +1928,7 @@ Matrica konfuzije:
  [  21    0    0    0    2   32  112]]
 \end{lstlisting}
 
-Konstruisani model ima veću preciznost na test skupu od prethodnog. Kada se uporedi sa modelom sa istim parametrima koji je kosntruisan nad podacima bez balansiranja dobija se manja preciznost na test skupu, kao i malo niže vrednsoti odziva za svaku od klasa sem klase sedam.
+Konstruisani model ima veću preciznost na test skupu od prethodnog. Kada se uporedi sa modelom sa istim parametrima koji je kosntruisan nad podacima bez balansiranja dobija se manja preciznost na test skupu, kao i malo niže vrednosti odziva za svaku od klasa sem klase sedam.
 
 \subsubsection{SVM}
 \label{subsubsec:svm_3}
@@ -1958,7 +1958,7 @@ Matrica konfuzije:
  [   3    0    0    0    0   15  149]]
 \end{lstlisting}
 
-Rezultati su dobri. Model ne klasifikuje dobro klasu dva. Ako uporedimo ovaj model sa model sa istim parametrima konstruisanom nad ne balansiranim podacima, primećujemo da su rezultati identični. Sada konstruišemo SVM sa polinomijalnim kernelom. Parametri modela su prikazani u kodu \ref{code:kod54}
+Rezultati su dobri. Model ne klasifikuje dobro klasu dva. Ako uporedimo ovaj model sa model sa istim parametrima konstruisanom nad nebalansiranim podacima, primećujemo da su rezultati identični. Sada konstruišemo SVM sa polinomijalnim kernelom. Parametri modela su prikazani u kodu \ref{code:kod54}
 
 \begin{lstlisting}[language=Python3, caption=SVM sa polinomijalnim kernelom nad balansiranim podacima, label=code:kod54]
 clf = SVC(C=300, kernel='poly', gamma='scale', degree=1)
@@ -1983,7 +1983,7 @@ Matrica konfuzije:
  [   1    0    0    1    0   15  150]]
 \end{lstlisting}
 
-Ovaj model je takođe dobar. Klasifikuje klasu dva dosta bolje od prethodnog, ali isto tako ima niži odziv za klasu tri. I ovaj model ima identične rezultate kao model sa istim parametrima konstruisan nad ne balansiranim podacima. Napomenimo i to da ta dva modela bolje klasifikuju klasu dva od svih ostalih.
+Ovaj model je takođe dobar. Klasifikuje klasu dva dosta bolje od prethodnog, ali isto tako ima niži odziv za klasu tri. I ovaj model ima identične rezultate kao model sa istim parametrima konstruisan nad nebalansiranim podacima. Napomenimo i to da ta dva modela bolje klasifikuju klasu dva od svih ostalih.
 
 \subsubsection{Gradient boosting}
 \label{subsubsec:gradinet_boosting_3}
@@ -2047,7 +2047,7 @@ Matrica konfuzije:
  [ 2  0  0  1  0  2  6]]
 \end{lstlisting}
 
-Rezultati koje nam je dao ovaj model su slični rezultatima prethodnog. Najveća rezlika je u tome što je ovaj model dosta primeraka pogrešno klasifikovao kao u klasu jedan.
+Rezultati koje nam je dao ovaj model su slični rezultatima prethodnog. Najveća rezlika je u tome što je ovaj model dosta primeraka pogrešno klasifikovao kao primerke klasu jedan.
 
 Sada ćemo klasifikovati elemente van granica uz pomoć modela sa istim parametrima, ali konstruisanim nad nebalansiranim podacima sa veštački dodatim primercima klase dva. Rezultati dobijeni preko modela sa rbf kernelom:
 
@@ -2155,7 +2155,7 @@ Matrica konfuzije:
  [   2    0    0    1    0   17  147]]
 \end{lstlisting}
 
-Od ova tri modela prvi ima najvišu precinzost i na test i na trening skupu, ali najgore klasifikuje primerke klase dva. Drugi model ima najviše tačno pogođenih primeraka klase dva, ali najlošnije klasifikuje klasu tri. Model zasnovan na glasanju različitih SVM modela se najbolje pokazao, zato što ima visoku preciznost i na test i na trening skupu, a i klasifikacija klase dva mu je bolja od klasifikacije klase dva SVM modela sa rbf kernelom. Bolje klasifikuje klasu tri od ostalih modela.
+Od ova tri modela prvi ima najvišu preciznost i na test i na trening skupu, ali najgore klasifikuje primerke klase dva. Drugi model ima najviše tačno pogođenih primeraka klase dva, ali najlošnije klasifikuje klasu tri. Model zasnovan na glasanju različitih SVM modela se najbolje pokazao, zato što ima visoku preciznost i na test i na trening skupu, a i klasifikacija klase dva mu je bolja od klasifikacije klase dva SVM modela sa rbf kernelom. Bolje klasifikuje klasu tri od ostalih modela.
 
 Za sam kraj napomenimo i to da su modeli poput neuronskih mreža i gradient busting imali visoku preciznost, ali su imali ili nižu preciznost na test ili trening skupu, ili su dosta lošije klasifikovali primerke klasa dva i tri.
 
