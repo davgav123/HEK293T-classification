@@ -1,2 +1,6 @@
 # Note:
-    Data can be found here. Every file except 'combined_data' one is a class. Combined data file is data after preprocessing.
+    Data can be found here. 
+    Every file except 'data without outliers' and 'outliers' is a separate class.
+    
+    Data without outliers file contains data after preprocessing.
+    Outliers file contains outliers.
