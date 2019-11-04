@@ -1,0 +1,122 @@
+\begin{thebibliography}{10}
+
+\bibitem{pandas}
+Pandas documentation.
+\newblock on-line at: \url{http://pandas.pydata.org/pandas-docs/stable/}.
+
+\bibitem{numpy}
+Numpy documentation.
+\newblock on-line at: \url{https://www.numpy.org/devdocs/}.
+
+\bibitem{scikit-learn}
+Scikit-learn.
+\newblock on-line at: \url{https://scikit-learn.org/stable/}.
+
+\bibitem{matplotlib}
+Matplotlib.
+\newblock on-line at: \url{https://matplotlib.org/}.
+
+\bibitem{googlecolab}
+Google colaboratory.
+\newblock on-line at: \url{https://research.google.com/colaboratory/faq.html}
+  and
+  \url{https://colab.research.google.com/notebooks/welcome.ipynb#recent=true}.
+
+\bibitem{lof}
+Phillip Wenig.
+\newblock Local outlier factor for anomaly detection.
+\newblock 2018.
+\newblock on-line at:
+  \url{https://towardsdatascience.com/local-outlier-factor-for-anomaly-detection-cc0c770d2ebe}.
+
+\bibitem{knn}
+Devin Soni.
+\newblock Introduction to k-nearest-neighbors.
+\newblock 2018.
+\newblock on-line at:
+  \url{https://towardsdatascience.com/introduction-to-k-nearest-neighbors-3b534bb11d26}.
+
+\bibitem{naivebayes}
+Victor Roman.
+\newblock Naive bayes algorithm: Intuition and implementation in a spam
+  detector.
+\newblock 2019.
+\newblock on-line at:
+  \url{https://towardsdatascience.com/naive-bayes-intuition-and-implementation-ac328f9c9718}.
+
+\bibitem{multinomnb}
+Scikit-learn.
+\newblock Multinomial-naive-bayes.
+\newblock on-line at:
+  \url{https://scikit-learn.org/stable/modules/naive_bayes.html#multinomial-naive-bayes}.
+
+\bibitem{complemnb}
+Scikit-learn.
+\newblock Complement-naive-bayes.
+\newblock on-line at:
+  \url{https://scikit-learn.org/stable/modules/naive_bayes.html#complement-naive-bayes}.
+
+\bibitem{decisiontrees}
+Thushan Ganegedara.
+\newblock Intuitive guide to understanding decision trees.
+\newblock 2018.
+\newblock on-line at:
+  \url{https://medium.com/greyatom/decision-trees-a-simple-way-to-visualize-a-decision-dc506a403aeb}.
+
+\bibitem{stabla}
+Scikit-learn.
+\newblock Decision-tree-classifier.
+\newblock on-line at:
+  \url{https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html#sklearn.tree.DecisionTreeClassifier}.
+
+\bibitem{svm}
+Rushikesh Pupale.
+\newblock Support vector machines(svm) - an overview.
+\newblock 2018.
+\newblock on-line at:
+  \url{https://towardsdatascience.com/https-medium-com-pupalerushikesh-svm-f4b42800e989}.
+
+\bibitem{kernels}
+Scikit-learn.
+\newblock Kernel functions.
+\newblock on-line at:
+  \url{https://scikit-learn.org/stable/modules/svm.html#kernel-functions}.
+
+\bibitem{neuralnetworks}
+Suryansh S.
+\newblock Neural networks: All you need to know.
+\newblock 2018.
+\newblock on-line at:
+  \url{https://towardsdatascience.com/nns-aynk-c34efe37f15a}.
+
+\bibitem{mlpclf}
+Scikit-learn.
+\newblock Mlpclassifier.
+\newblock on-line at:
+  \url{https://scikit-learn.org/stable/modules/generated/sklearn.neural_network.MLPClassifier.html#sklearn.neural_network.MLPClassifier}.
+
+\bibitem{ensemble}
+Joseph Rocca and Baptiste Rocca.
+\newblock Ensemble methods: bagging, boosting and stacking.
+\newblock 2019.
+\newblock on-line at:
+  \url{https://towardsdatascience.com/ensemble-methods-bagging-boosting-and-stacking-c9214a10a205}.
+
+\bibitem{votingclf}
+Scikit-learn.
+\newblock Votingclassifier.
+\newblock on-line at:
+  \url{https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.VotingClassifier.html}.
+
+\bibitem{imbalanceddata}
+Tara Boyle.
+\newblock Dealing with imbalanced data.
+\newblock 2019.
+\newblock on-line at:
+  \url{https://towardsdatascience.com/methods-for-dealing-with-imbalanced-data-5b761be45a18}.
+
+\bibitem{imbalancedlearn}
+Imbalanced-learn documentation.
+\newblock on-line at: \url{https://imbalanced-learn.readthedocs.io/en/stable/}.
+
+\end{thebibliography}

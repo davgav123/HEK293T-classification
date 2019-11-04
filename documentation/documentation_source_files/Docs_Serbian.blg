@@ -1,0 +1,59 @@
+This is BibTeX, Version 0.99d (TeX Live 2017/Debian)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
+The top-level auxiliary file: Docs_Serbian.aux
+The style file: unsrt.bst
+Database file #1: reference.bib
+Warning--empty journal in lof
+Warning--empty journal in knn
+Warning--empty journal in naivebayes
+Warning--empty journal in multinomnb
+Warning--empty year in multinomnb
+Warning--empty journal in complemnb
+Warning--empty year in complemnb
+Warning--empty journal in decisiontrees
+Warning--empty journal in svm
+Warning--empty journal in neuralnetworks
+Warning--empty journal in ensemble
+Warning--empty journal in imbalanceddata
+You've used 20 entries,
+            1791 wiz_defined-function locations,
+            515 strings with 6288 characters,
+and the built_in function-call counts, 2482 in all, are:
+= -- 195
+> -- 66
+< -- 0
++ -- 35
+- -- 15
+* -- 40
+:= -- 380
+add.period$ -- 62
+call.type$ -- 20
+change.case$ -- 20
+chr.to.int$ -- 0
+cite$ -- 32
+duplicate$ -- 130
+empty$ -- 321
+format.name$ -- 15
+if$ -- 563
+int.to.chr$ -- 0
+int.to.str$ -- 20
+missing$ -- 10
+newline$ -- 105
+num.names$ -- 14
+pop$ -- 128
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 66
+stack$ -- 0
+substring$ -- 0
+swap$ -- 10
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 12
+while$ -- 14
+width$ -- 22
+write$ -- 186
+(There were 12 warnings)

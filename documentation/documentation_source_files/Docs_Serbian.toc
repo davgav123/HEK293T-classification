@@ -1,0 +1,38 @@
+\babel@toc {serbian}{}
+\contentsline {section}{\numberline {1}Uvod}{3}{section.1}
+\contentsline {section}{\numberline {2}Preprocesiranje}{3}{section.2}
+\contentsline {subsection}{\numberline {2.1}Spajanje i eliminacija nula kolona}{4}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}Eliminacija elemenata van granica}{5}{subsection.2.2}
+\contentsline {section}{\numberline {3}Uvid u podatke}{6}{section.3}
+\contentsline {section}{\numberline {4}Klasifikacija}{6}{section.4}
+\contentsline {subsection}{\numberline {4.1}K najbli\v {z}ih suseda}{7}{subsection.4.1}
+\contentsline {subsection}{\numberline {4.2}Naivni Bajes}{9}{subsection.4.2}
+\contentsline {subsection}{\numberline {4.3}Stabla odlu\v {c}ivanja}{10}{subsection.4.3}
+\contentsline {subsection}{\numberline {4.4}SVM}{13}{subsection.4.4}
+\contentsline {subsubsection}{\numberline {4.4.1}Rbf kernel}{13}{subsubsection.4.4.1}
+\contentsline {subsubsection}{\numberline {4.4.2}Polinomijalni kernel}{16}{subsubsection.4.4.2}
+\contentsline {subsubsection}{\numberline {4.4.3}Linearni kernel}{18}{subsubsection.4.4.3}
+\contentsline {subsection}{\numberline {4.5}Neuronske mre\v {z}e}{20}{subsection.4.5}
+\contentsline {subsection}{\numberline {4.6}Ansambl metode}{23}{subsection.4.6}
+\contentsline {subsubsection}{\numberline {4.6.1}Nasumi\v {c}ne \v {s}ume}{24}{subsubsection.4.6.1}
+\contentsline {subsubsection}{\numberline {4.6.2}Gradient boosting}{26}{subsubsection.4.6.2}
+\contentsline {subsubsection}{\numberline {4.6.3}Bagging}{26}{subsubsection.4.6.3}
+\contentsline {subsubsection}{\numberline {4.6.4}Boosting}{28}{subsubsection.4.6.4}
+\contentsline {subsubsection}{\numberline {4.6.5}Klasifikatori zasnovani na glasanju}{30}{subsubsection.4.6.5}
+\contentsline {section}{\numberline {5}Balansiranje klasa}{33}{section.5}
+\contentsline {subsection}{\numberline {5.1}Naivan pristup}{34}{subsection.5.1}
+\contentsline {subsubsection}{\numberline {5.1.1}K najbli\v {z}ih suseda}{34}{subsubsection.5.1.1}
+\contentsline {subsubsection}{\numberline {5.1.2}Stabla odlu\v {c}ivanja}{34}{subsubsection.5.1.2}
+\contentsline {subsubsection}{\numberline {5.1.3}SVM}{35}{subsubsection.5.1.3}
+\contentsline {subsubsection}{\numberline {5.1.4}Neuronske mre\v {z}e}{37}{subsubsection.5.1.4}
+\contentsline {subsubsection}{\numberline {5.1.5}Klasifikatori zasnovani na glasanju}{37}{subsubsection.5.1.5}
+\contentsline {subsection}{\numberline {5.2}Dodavanje ve\v {s}ta\v {c}kih primeraka}{38}{subsection.5.2}
+\contentsline {subsubsection}{\numberline {5.2.1}SVM}{38}{subsubsection.5.2.1}
+\contentsline {subsubsection}{\numberline {5.2.2}Klasifikatori zasnovani na glasanju}{39}{subsubsection.5.2.2}
+\contentsline {subsection}{\numberline {5.3}Jednak broj primeraka svih klasa}{40}{subsection.5.3}
+\contentsline {subsubsection}{\numberline {5.3.1}Stabla odlu\v {c}ivanja}{40}{subsubsection.5.3.1}
+\contentsline {subsubsection}{\numberline {5.3.2}SVM}{41}{subsubsection.5.3.2}
+\contentsline {subsubsection}{\numberline {5.3.3}Gradient boosting}{42}{subsubsection.5.3.3}
+\contentsline {section}{\numberline {6}Klasifikacija elemenata van granica}{43}{section.6}
+\contentsline {section}{\numberline {7}Zaklju\v {c}ak}{44}{section.7}
+\contentsline {section}{Literatura}{47}{lstnumber.-64.11}
